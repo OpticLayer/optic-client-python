@@ -1,0 +1,120 @@
+Metadata-Version: 2.1
+Name: observex-sdk
+Version: 0.1.0
+Summary: ObserveX Python SDK — auto-instrument your application with one line of code
+Home-page: UNKNOWN
+Author: ObserveX
+License: UNKNOWN
+Description: # ObserveX Python SDK
+        
+        Auto-instrument your Python application with **one line of code** — just like Datadog's `ddtrace`.
+        
+        ## Quick Start
+        
+        ```bash
+        pip install -e ./observex-sdk
+        ```
+        
+        ```python
+        import observex
+        
+        observex.init(
+            api_key="your-team-api-key",
+            service_name="my-app",
+            endpoint="http://localhost:8080",  # optional
+        )
+        
+        # That's it! Traces, metrics, and logs are automatically collected.
+        ```
+        
+        ## What Gets Collected
+        
+        ### Traces
+        - HTTP requests (Flask, Django, FastAPI)
+        - Outgoing HTTP calls (requests, urllib3, httpx)
+        - Database queries (SQLAlchemy, PyMySQL, psycopg2)
+        - Redis operations
+        - Celery tasks
+        
+        ### Metrics
+        - System: CPU, memory, disk utilization
+        - Application: Request count, duration, errors (via instrumented frameworks)
+        
+        ### Logs
+        - Python `logging` module automatically bridged to OTel logs
+        - Correlated with trace context (trace_id, span_id)
+        
+        ## Configuration
+        
+        All settings can be passed to `init()` or set via env vars:
+        
+        | `init()` kwarg | Env Var | Default | Description |
+        |----------------|---------|---------|-------------|
+        | `api_key` | `OBSERVEX_API_KEY` | — | Team API key (required) |
+        | `service_name` | `OBSERVEX_SERVICE_NAME` | — | Service name (required) |
+        | `endpoint` | `OBSERVEX_ENDPOINT` | `http://localhost:8080` | Backend URL |
+        | `environment` | `OBSERVEX_ENVIRONMENT` | `local` | Deployment environment |
+        | `service_version` | `OBSERVEX_SERVICE_VERSION` | — | Version tag |
+        
+        ### Optional Features
+        
+        ```python
+        observex.init(
+            api_key="...",
+            service_name="...",
+            auto_instrument=True,         # Auto-detect & instrument libraries
+            enable_traces=True,           # Collect traces
+            enable_metrics=True,          # Collect metrics
+            enable_logs=True,             # Capture Python logs
+            enable_system_metrics=True,   # CPU/memory/disk metrics
+            log_level="INFO",             # Min log level to capture
+            excluded_urls=["/health"],    # URLs to skip tracing
+        )
+        ```
+        
+        ## Framework Examples
+        
+        ### Flask
+        
+        ```python
+        import observex
+        observex.init(api_key="...", service_name="my-flask-app")
+        
+        from flask import Flask
+        app = Flask(__name__)
+        
+        @app.route("/")
+        def hello():
+            return "Hello World"  # Automatically traced!
+        ```
+        
+        ### FastAPI
+        
+        ```python
+        import observex
+        observex.init(api_key="...", service_name="my-fastapi-app")
+        
+        from fastapi import FastAPI
+        app = FastAPI()
+        
+        @app.get("/")
+        async def hello():
+            return {"message": "Hello World"}  # Automatically traced!
+        ```
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: System :: Monitoring
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Provides-Extra: flask
+Provides-Extra: django
+Provides-Extra: fastapi
+Provides-Extra: requests
+Provides-Extra: sqlalchemy
+Provides-Extra: pymysql
+Provides-Extra: redis
+Provides-Extra: celery
+Provides-Extra: kafka-python
+Provides-Extra: all

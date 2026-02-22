@@ -1,0 +1,46 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="observex-sdk",
+    version="0.1.0",
+    description="ObserveX Python SDK — auto-instrument your application with one line of code",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+    author="ObserveX",
+    packages=find_packages(),
+    python_requires=">=3.8",
+    install_requires=[
+        "opentelemetry-api>=1.20.0",
+        "opentelemetry-sdk>=1.20.0",
+        "opentelemetry-exporter-otlp-proto-http>=1.20.0",
+        "opentelemetry-instrumentation>=0.40b0",
+        "psutil>=5.9.0",
+    ],
+    extras_require={
+        "flask": ["opentelemetry-instrumentation-flask>=0.40b0"],
+        "django": ["opentelemetry-instrumentation-django>=0.40b0"],
+        "fastapi": ["opentelemetry-instrumentation-fastapi>=0.40b0"],
+        "requests": ["opentelemetry-instrumentation-requests>=0.40b0"],
+        "sqlalchemy": ["opentelemetry-instrumentation-sqlalchemy>=0.40b0"],
+        "pymysql": ["opentelemetry-instrumentation-pymysql>=0.40b0"],
+        "redis": ["opentelemetry-instrumentation-redis>=0.40b0"],
+        "celery": ["opentelemetry-instrumentation-celery>=0.40b0"],
+        "kafka-python": ["opentelemetry-instrumentation-kafka-python>=0.40b0"],
+        "all": [
+            "opentelemetry-instrumentation-flask>=0.40b0",
+            "opentelemetry-instrumentation-django>=0.40b0",
+            "opentelemetry-instrumentation-fastapi>=0.40b0",
+            "opentelemetry-instrumentation-requests>=0.40b0",
+            "opentelemetry-instrumentation-sqlalchemy>=0.40b0",
+            "opentelemetry-instrumentation-pymysql>=0.40b0",
+            "opentelemetry-instrumentation-redis>=0.40b0",
+            "opentelemetry-instrumentation-celery>=0.40b0",
+            "opentelemetry-instrumentation-kafka-python>=0.40b0",
+        ],
+    },
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "Operating System :: OS Independent",
+        "Topic :: System :: Monitoring",
+    ],
+)
