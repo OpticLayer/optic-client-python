@@ -16,9 +16,9 @@ from opentelemetry.exporter.otlp.proto.http._log_exporter import OTLPLogExporter
 from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
 from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
 
-from observex.config import ObserveXConfig
-from observex.instruments import auto_instrument
-from observex.system_metrics import start_system_metrics
+from optic.config import OpticConfig
+from optic.instruments import auto_instrument
+from optic.system_metrics import start_system_metrics
 
 _initialized = False
 _tracer_provider: Optional[TracerProvider] = None
@@ -37,15 +37,15 @@ def init(
     endpoint: str = "",
     **kwargs,
 ) -> None:
-    """Initialize ObserveX SDK — sets up tracing, metrics, and logging.
+    """Initialize Optic SDK — sets up tracing, metrics, and logging.
 
     This is the only function you need to call. Everything else is automatic.
 
     Args:
-        api_key: Team API key. Can also be set via OBSERVEX_API_KEY env var.
-        service_name: Service name. Can also be set via OBSERVEX_SERVICE_NAME.
+        api_key: Team API key. Can also be set via OPTIC_API_KEY env var.
+        service_name: Service name. Can also be set via OPTIC_SERVICE_NAME.
         endpoint: OTLP endpoint. Defaults to http://localhost:8080.
-        **kwargs: Additional ObserveXConfig fields.
+        **kwargs: Additional OpticConfig fields.
     """
     global _initialized, _tracer_provider, _meter_provider, _logger_provider
 
@@ -61,15 +61,15 @@ def init(
     if endpoint:
         overrides["endpoint"] = endpoint
 
-    cfg = ObserveXConfig.from_env(**overrides)
+    cfg = OpticConfig.from_env(**overrides)
 
     if not cfg.api_key:
         raise ValueError(
-            "ObserveX API key is required. Pass api_key= or set OBSERVEX_API_KEY env var."
+            "Optic API key is required. Pass api_key= or set OPTIC_API_KEY env var."
         )
     if not cfg.service_name:
         raise ValueError(
-            "Service name is required. Pass service_name= or set OBSERVEX_SERVICE_NAME env var."
+            "Service name is required. Pass service_name= or set OPTIC_SERVICE_NAME env var."
         )
 
     # Build OTel resource
@@ -77,7 +77,7 @@ def init(
         SERVICE_NAME: cfg.service_name,
         "deployment.environment": cfg.environment,
         "service.version": cfg.service_version or "unknown",
-        "telemetry.sdk.name": "observex-sdk",
+        "telemetry.sdk.name": "optic-sdk",
         "telemetry.sdk.version": "0.1.0",
     })
 
@@ -132,8 +132,8 @@ def init(
     _initialized = True
     atexit.register(shutdown)
 
-    logging.getLogger("observex").info(
-        f"ObserveX SDK initialized: service={cfg.service_name}, "
+    logging.getLogger("optic").info(
+        f"Optic SDK initialized: service={cfg.service_name}, "
         f"endpoint={cfg.endpoint}, traces={cfg.enable_traces}, "
         f"metrics={cfg.enable_metrics}, logs={cfg.enable_logs}"
     )

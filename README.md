@@ -1,17 +1,17 @@
-# ObserveX Python SDK
+# Optic Python SDK
 
 Auto-instrument your Python application with **one line of code** — just like Datadog's `ddtrace`.
 
 ## Quick Start
 
 ```bash
-pip install -e ./observex-sdk
+pip install -e ./optic-sdk
 ```
 
 ```python
-import observex
+import optic
 
-observex.init(
+optic.init(
     api_key="your-team-api-key",
     service_name="my-app",
     endpoint="http://localhost:8080",  # optional
@@ -43,16 +43,16 @@ All settings can be passed to `init()` or set via env vars:
 
 | `init()` kwarg | Env Var | Default | Description |
 |----------------|---------|---------|-------------|
-| `api_key` | `OBSERVEX_API_KEY` | — | Team API key (required) |
-| `service_name` | `OBSERVEX_SERVICE_NAME` | — | Service name (required) |
-| `endpoint` | `OBSERVEX_ENDPOINT` | `http://localhost:8080` | Backend URL |
-| `environment` | `OBSERVEX_ENVIRONMENT` | `local` | Deployment environment |
-| `service_version` | `OBSERVEX_SERVICE_VERSION` | — | Version tag |
+| `api_key` | `OPTIC_API_KEY` | — | Team API key (required) |
+| `service_name` | `OPTIC_SERVICE_NAME` | — | Service name (required) |
+| `endpoint` | `OPTIC_ENDPOINT` | `http://localhost:8080` | Backend URL |
+| `environment` | `OPTIC_ENVIRONMENT` | `local` | Deployment environment |
+| `service_version` | `OPTIC_SERVICE_VERSION` | — | Version tag |
 
 ### Optional Features
 
 ```python
-observex.init(
+optic.init(
     api_key="...",
     service_name="...",
     auto_instrument=True,         # Auto-detect & instrument libraries
@@ -70,8 +70,8 @@ observex.init(
 ### Flask
 
 ```python
-import observex
-observex.init(api_key="...", service_name="my-flask-app")
+import optic
+optic.init(api_key="...", service_name="my-flask-app")
 
 from flask import Flask
 app = Flask(__name__)
@@ -84,8 +84,8 @@ def hello():
 ### FastAPI
 
 ```python
-import observex
-observex.init(api_key="...", service_name="my-fastapi-app")
+import optic
+optic.init(api_key="...", service_name="my-fastapi-app")
 
 from fastapi import FastAPI
 app = FastAPI()

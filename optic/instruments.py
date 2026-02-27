@@ -4,7 +4,7 @@ import importlib
 import logging
 from typing import List
 
-logger = logging.getLogger("observex.instruments")
+logger = logging.getLogger("optic.instruments")
 
 # Map of library → OTel instrumentor class path
 INSTRUMENTORS = {

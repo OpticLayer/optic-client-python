@@ -1,12 +1,12 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="observex-sdk",
+    name="optic-sdk",
     version="0.1.0",
-    description="ObserveX Python SDK — auto-instrument your application with one line of code",
+    description="Optic Python SDK — auto-instrument your application with one line of code",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    author="ObserveX",
+    author="Optic",
     packages=find_packages(),
     python_requires=">=3.8",
     install_requires=[

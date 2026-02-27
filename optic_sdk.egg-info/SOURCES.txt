@@ -1,0 +1,12 @@
+README.md
+setup.py
+optic/__init__.py
+optic/_core.py
+optic/config.py
+optic/instruments.py
+optic/system_metrics.py
+optic_sdk.egg-info/PKG-INFO
+optic_sdk.egg-info/SOURCES.txt
+optic_sdk.egg-info/dependency_links.txt
+optic_sdk.egg-info/requires.txt
+optic_sdk.egg-info/top_level.txt

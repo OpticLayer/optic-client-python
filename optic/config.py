@@ -1,4 +1,4 @@
-"""Configuration for the ObserveX SDK."""
+"""Configuration for the Optic SDK."""
 
 from dataclasses import dataclass, field
 from typing import List, Optional
@@ -6,8 +6,8 @@ import os
 
 
 @dataclass
-class ObserveXConfig:
-    """Configuration for ObserveX SDK initialization.
+class OpticConfig:
+    """Configuration for Optic SDK initialization.
 
     Attributes:
         api_key: Team API key for authentication. Required.
@@ -42,17 +42,17 @@ class ObserveXConfig:
     excluded_urls: List[str] = field(default_factory=list)
 
     @classmethod
-    def from_env(cls, **overrides) -> "ObserveXConfig":
+    def from_env(cls, **overrides) -> "OpticConfig":
         """Create config from environment variables with optional overrides."""
         cfg = cls(
-            api_key=os.getenv("OBSERVEX_API_KEY", os.getenv("OTEL_API_KEY", "")),
-            service_name=os.getenv("OBSERVEX_SERVICE_NAME", os.getenv("OTEL_SERVICE_NAME", "")),
+            api_key=os.getenv("OPTIC_API_KEY", os.getenv("OTEL_API_KEY", "")),
+            service_name=os.getenv("OPTIC_SERVICE_NAME", os.getenv("OTEL_SERVICE_NAME", "")),
             endpoint=os.getenv(
-                "OBSERVEX_ENDPOINT",
+                "OPTIC_ENDPOINT",
                 os.getenv("OTEL_EXPORTER_OTLP_ENDPOINT", "http://localhost:8080"),
             ),
-            environment=os.getenv("OBSERVEX_ENVIRONMENT", "local"),
-            service_version=os.getenv("OBSERVEX_SERVICE_VERSION", ""),
+            environment=os.getenv("OPTIC_ENVIRONMENT", "local"),
+            service_version=os.getenv("OPTIC_SERVICE_VERSION", ""),
         )
         for key, value in overrides.items():
             if hasattr(cfg, key):

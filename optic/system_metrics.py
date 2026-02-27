@@ -4,7 +4,7 @@ import logging
 import threading
 from typing import Optional
 
-logger = logging.getLogger("observex.system_metrics")
+logger = logging.getLogger("optic.system_metrics")
 
 _collector_thread: Optional[threading.Thread] = None
 _stop_event = threading.Event()
@@ -22,7 +22,7 @@ def start_system_metrics(interval_sec: float = 15.0) -> None:
 
     from opentelemetry import metrics
 
-    meter = metrics.get_meter("observex.system", "0.1.0")
+    meter = metrics.get_meter("optic.system", "0.1.0")
 
     cpu_gauge = meter.create_observable_gauge(
         "system.cpu.utilization",
